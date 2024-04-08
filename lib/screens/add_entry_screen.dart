@@ -14,7 +14,7 @@ class AddEntryScreen extends StatefulWidget {
 class _AddEntryScreenState extends State<AddEntryScreen> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  bool isExpense = true;
+  bool _isExpense = true;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,23 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
               decoration: const InputDecoration(
                 label: Text("Amount"),
               ),
+            ),
+            const SizedBox(
+              height: 50.0,
+            ),
+            Row(
+              children: [
+                _isExpense ? const Text("Expense") : const Text("Income"),
+                const SizedBox(width: 10.0),
+                Switch(
+                    value: _isExpense,
+                    onChanged: (value) {
+                      setState(() {
+                        _isExpense = value;
+                      });
+                    }),
+                // const Text("Income"),
+              ],
             )
           ],
         ),
