@@ -27,8 +27,20 @@ class _EntryScreenState extends State<EntryScreen> {
         itemCount: entries.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(entries[index].description),
-            subtitle: Text(entries[index].amount.toString()),
+            title: Text(
+              entries[index].description,
+              style: const TextStyle(
+                fontSize: 18.0,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+            subtitle: Text(
+                entries[index].amount.toString(),
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold
+              ),
+            ),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => EntryDetailsScreen(entry: entries[index])));
             },
