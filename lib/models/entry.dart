@@ -3,7 +3,7 @@
 
 class Entry {
   final String description;
-  final int amount;
+  final double amount;
   final DateTime date;
 
   // constructor

@@ -3,6 +3,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expense_tracker_project/models/entry.dart';
 
 class AddEntryScreen extends StatefulWidget {
   const AddEntryScreen({super.key});
@@ -60,10 +61,42 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
                     }),
                 // const Text("Income"),
               ],
+            ),
+            const SizedBox(
+              height: 50.0,
+            ),
+            ElevatedButton(
+              onPressed: () {
+              _addEntry(context);
+            },
+                child: const Text("Save"),
             )
           ],
         ),
       ),
     );
+  }
+
+  void _addEntry(BuildContext context) {
+    final description = _descriptionController.text.trim();
+    final amount = double.tryParse(_amountController.text.trim()) ?? 0.0;
+    if (description.isNotEmpty && amount != 0.0) {
+      final entry = Entry(
+          description: description,
+          amount: _isExpense ? -amount : amount,
+          date: DateTime.now()
+      );
+      Navigator.pop(context, entry);
+    }
+    else {
+      // works similar like toast in kotlin
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+                  "Please enter valid description and amount!"
+              )
+          )
+      );
+    }
   }
 }
